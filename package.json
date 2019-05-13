@@ -1,0 +1,52 @@
+{
+  "name": "ssr-react-css",
+  "version": "1.0.0",
+  "description": "Server side rendering in react with css (without css-in-js).",
+  "main": "index.js",
+  "author": "Madhur Garg",
+  "license": "MIT",
+  "dependencies": {
+    "cosmos": "auth0/cosmos",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-js-pagination": "^3.0.2",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^2.0.1",
+    "compression-webpack-plugin": "^2.0.0",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "html-webpack-plugin": "^3.2.0",
+    "ignore-loader": "^0.1.2",
+    "mini-css-extract-plugin": "^0.6.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/index.js",
+    "build-client": "webpack --config ./webpack-config/client/webpack.prod.js",
+    "build-client-basket": "BASE_URL=basketball38.hasura-app.io webpack --config ./webpack-config/client/webpack.prod.js",
+    "build-client-prod": "BASE_URL=hipbar.com webpack --config ./webpack-config/client/webpack.prod.js",
+    "build-ssr": "webpack --config ./webpack-config/ssr/webpack.ssr.js",
+    "build": "yarn run build-client",
+    "build-basket": "yarn run build-client-basket",
+    "build-prod": "yarn run build-client-prod",
+    "start:dev": "webpack-dev-server --config ./webpack-config/client/webpack.dev.js --host 0.0.0.0"
+  }
+}

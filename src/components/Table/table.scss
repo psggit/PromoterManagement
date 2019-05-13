@@ -1,0 +1,47 @@
+table {
+  border: 1px solid #c8e1ff;
+  border-collapse: collapse;
+  border-color: #c8e1ff;
+  background-color: #fff;
+  a {
+    color: #0366d6;
+  }
+}
+
+.table--state__loading {
+  text-align: center;
+}
+
+.table--state__no-data {
+  text-align: center;
+}
+
+thead tr {
+  background: #f1f8ff;
+  color: #24292e;
+}
+
+td, th {
+  padding: 6px 10px;
+  position: relative;
+}
+
+td a:hover {
+  text-decoration: underline
+}
+
+
+.table--action-menu {
+  background: #fff;
+  box-shadow: 0 2px 4px 0 #9b9b9b;
+  border-radius: 5px;
+  a {
+    cursor: pointer;
+    display: block;
+    padding: 5px 20px;
+    color: #333;
+  }
+  a:hover {
+    background: #f1f8ff;
+  }
+}

@@ -1,0 +1,33 @@
+.form {
+  width: 100%;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+.form--inline label {
+  margin: 0
+}
+
+input[type=radio] {
+  margin: 0 10px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+}
+
+.form--group:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.form--inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  input[type=text] {
+    margin-left: 40px;
+  }
+}

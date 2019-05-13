@@ -1,0 +1,26 @@
+.modal--box__header {
+  text-align: center;
+  padding: 20px;
+  h3 {
+    font-size: 20px;
+  }
+}
+
+.modal--box__container {
+  background: #fff;
+}
+
+.modal--box__body {
+  border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+  padding: 20px;
+}
+
+.modal--box__footer {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  button:first-child {
+    margin-right: 10px;
+  }
+}

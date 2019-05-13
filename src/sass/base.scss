@@ -1,0 +1,34 @@
+body {
+  background-color: #f9f9f9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Source Sans Pro", serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+label, p, h1, h2, h3, h4, h5, h6 {
+  color: #24292e;
+}
+
+.row {
+  display: flex;
+}
+
+select {
+  background-color: #eff3f6;
+  border-radius: 4px;
+  background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+  &:focus {
+    outline: 0;
+    background-image: none;
+    box-shadow: inset 0 0.15em 0.3em rgba(27,31,35,.15);
+  }
+}

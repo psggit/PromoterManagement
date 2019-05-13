@@ -1,0 +1,28 @@
+.header {
+  width: 100%;
+  height: 78px;
+  display: flex;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  box-shadow: 1px 1px 5px 0 rgba(21, 19, 19, 0.9);
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  background: #24292e;
+  h2 {
+    // font-weight: 400;
+    font-size: 22px;
+  }
+
+  p {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  h2, p {
+    color: #fff;
+    cursor: pointer;
+  }
+}
