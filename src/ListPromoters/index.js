@@ -159,13 +159,13 @@ export default function ListPromoters(props) {
           }}
         />
     },
-    {
-      name: null,
-      mapping: null,
-      fn: item => <Button appearance="secondary" size="small" onClick={() => {
-        mountModal(EditPromoter({}))
-      }}>Edit</Button>
-    }
+    // {
+    //   name: null,
+    //   mapping: null,
+    //   fn: item => <Button appearance="secondary" size="small" onClick={() => {
+    //     mountModal(EditPromoter({}))
+    //   }}>Edit</Button>
+    // }
   ]
 
   return (
