@@ -25,7 +25,7 @@ import { mountModal, unmountModal } from "Components/ModalBox/api"
 export default function ListPromoters(props) {
   const pageNo = parseInt(getQueryParamByName("page")) || 1
   const searchValue = getQueryParamByName("search") || ""
-  const limit = 5
+  const limit = 20
   const [promoters, setPromoters] = useState([])
   const [promotersCount, setPromotersCount] = useState(0)
   const [isLoaded, setLoadingState] = useState(false)
