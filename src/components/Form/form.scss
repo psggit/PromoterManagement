@@ -1,5 +1,13 @@
 .form {
   width: 100%;
+  p.error-message {
+    color: #ff3b34;
+    margin-bottom: 20px;
+    margin-top: -10px;
+    margin-left: 90px;
+    /* text-align: -webkit-center; */
+    font-size: 12px;
+  }
 }
 
 label {
@@ -7,7 +15,8 @@ label {
 }
 
 .form--inline label {
-  margin: 0
+  margin: 0;
+  width: 95px;
 }
 
 input[type=radio] {
@@ -26,8 +35,9 @@ label {
 .form--inline {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  input[type=text] {
-    margin-left: 40px;
+  // max-width: 500px;
+  // justify-content: space-between;
+  input[type=text], select {
+    //margin-left: 50px;
   }
 }

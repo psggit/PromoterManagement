@@ -174,7 +174,7 @@ export default function ListPromoters(props) {
         <PageHeading>Promoters List</PageHeading>
         <div style={{ paddingBottom: "20px", marginLeft: "20px" }}>
           <Button appearance="primary" onClick={() => {
-            mountModal(CreateNewPromoter({}))
+            mountModal(CreateNewPromoter({ history: props.history }))
           }}>Create Promoter</Button>
         </div>
       </div>

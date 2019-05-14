@@ -1,0 +1,16 @@
+// .select--container {
+//   position: relative;
+//   display: inline-block;
+// }
+
+.select {
+  width: 225px;
+  height: 40px;
+  background-color: rgba(61, 112, 178, 0.1);
+  border: 0;
+  padding: 0 10px;
+  color: #5a6872;
+  &:focus {
+    outline: 0;
+  }
+}

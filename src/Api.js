@@ -60,15 +60,17 @@ export function fetchConsumerDetail(req) {
 export function fetchRetailers(req) {
   return POST({
     api: "/Api/listRetailers",
-    apiBase: "retailer"
+    apiBase: "retailer",
+    data: req
   })
     .then(json => json)
 }
 
-export function fetchStates(req) {
+export function fetchStatesandCities(req) {
   return POST({
     api: "/Api/listStates",
-    apiBase: "retailer"
+    apiBase: "retailer",
+    data: req
   })
     .then(json => json)
 }
