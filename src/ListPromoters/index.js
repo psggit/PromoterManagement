@@ -25,7 +25,7 @@ import { mountModal, unmountModal } from "Components/ModalBox/api"
 export default function ListPromoters(props) {
   const pageNo = parseInt(getQueryParamByName("page")) || 1
   const searchValue = getQueryParamByName("search") || ""
-  const limit = 20
+  const limit = 5
   const [promoters, setPromoters] = useState([])
   const [promotersCount, setPromotersCount] = useState(0)
   const [isLoaded, setLoadingState] = useState(false)
@@ -102,7 +102,7 @@ export default function ListPromoters(props) {
 
   const tableColumns = [
     {
-      name: "Store ID",
+      name: "ID",
       mapping: "store_id",
       // fn: id => <NavLink to={`/admin/promoters/detail/${id}`}>{id}</NavLink>
     },
