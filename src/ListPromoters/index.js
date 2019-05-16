@@ -102,7 +102,7 @@ export default function ListPromoters(props) {
 
   const tableColumns = [
     {
-      name: "ID",
+      name: "Store ID",
       mapping: "store_id",
       // fn: id => <NavLink to={`/admin/promoters/detail/${id}`}>{id}</NavLink>
     },
