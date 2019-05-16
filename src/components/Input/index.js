@@ -6,7 +6,7 @@ export default function Input(props) {
     <input
       style={{ width: props.width }}
       spellCheck="false"
-      autoComplete="false"
+      autoComplete="falsfwfewfe"
       className="react--input"
       type={props.type || "text"}
       {...props}
