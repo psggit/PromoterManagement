@@ -74,3 +74,12 @@ export function fetchStatesandCities(req) {
   })
     .then(json => json)
 }
+
+export function editPromoter(req) {
+  return POST({
+    api: "/Api/promoter/edit",
+    apiBase: "promoter",
+    data: req
+  })
+    .then(json => json)
+}

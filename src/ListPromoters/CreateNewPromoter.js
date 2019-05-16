@@ -146,34 +146,6 @@ export default function CreateNewPromoter(props) {
         })
     }
 
-    fetchRetailerList(cityId) {
-      const cityName = this.state.cityList.find((item) => parseInt(item.value) === parseInt(cityId)).text
-      fetchRetailers({
-        filter: {
-          column: "CityName",
-          operator: "CASEIGNORE",
-          value: cityName
-        },
-        limit: 10000,
-        offset: 0
-      })
-        .then((response) => {
-          const retailerList = response.ret_response.map((item) => {
-            return {
-              text: item.outlet_name,
-              value: item.id
-            }
-          })
-          this.setState({
-            retailerList,
-            selectedStoreIdx: retailerList[0].value
-          })
-        })
-        .catch((err) => {
-          console.log("Error in fetching retailer list", err)
-        })
-    }
-
     isFormValid() {
       const { email, mobile_number, password } = this.state
       if (this.state.email.trim().length === 0) {
@@ -238,7 +210,6 @@ export default function CreateNewPromoter(props) {
           .then(createPromoterRes => {
             unmountModal()
             alert(createPromoterRes.message)
-            console.log("props", this.props)
             props.history.push("/admin/promoters")
           })
       }
