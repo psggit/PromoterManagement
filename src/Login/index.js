@@ -23,12 +23,9 @@ export default function Login(props) {
       /** Get the token and create a session */
       authLogin(authLoginReq)
         .then(json => {
-          authTokenInfo()
-            .then(json => {
-              setLoadingState(false)
-              createSession(JSON.stringify(json))
-              props.history.push("/admin")
-            })
+          setLoadingState(false)
+          createSession(json)
+          props.history.push("/admin")
         })
         .catch(err => {
           console.log(err)

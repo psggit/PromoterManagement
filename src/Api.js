@@ -4,6 +4,7 @@ export function authLogin(req) {
   return POST({
     api: "/login",
     apiBase: "auth",
+    type: "Public",
     data: req
   })
 }
@@ -11,14 +12,16 @@ export function authLogin(req) {
 export function authLogout(req) {
   return GET({
     api: "/user/logout",
-    apiBase: "auth"
+    apiBase: "auth",
+    type: "Public"
   })
 }
 
 export function authTokenInfo(req) {
   return GET({
     api: "/user/account/info",
-    apiBase: "auth"
+    apiBase: "auth",
+    type: "Public",
   })
 }
 
