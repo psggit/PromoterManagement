@@ -23,12 +23,9 @@ export default function Login(props) {
       /** Get the token and create a session */
       authLogin(authLoginReq)
         .then(json => {
-          authTokenInfo()
-            .then(json => {
-              setLoadingState(false)
-              createSession(JSON.stringify(json))
-              props.history.push("/admin")
-            })
+          setLoadingState(false)
+          createSession(json)
+          props.history.push("/admin")
         })
         .catch(err => {
           console.log(err)
@@ -53,7 +50,7 @@ export default function Login(props) {
               <Input width="100%" type="password" onChange={(e) => { setPassword(e.target.value) }} />
             </FormGroup>
 
-            <Button width="100%" disabled={isLoading} onClick={handleClick}>Sign in</Button>
+            <Button appearance="primary" width="100%" disabled={isLoading} onClick={handleClick}>Sign in</Button>
           </Form>
         </div>
       </div>
