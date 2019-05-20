@@ -13,20 +13,12 @@ export default function CreateNewPromoter(props) {
     constructor() {
       super()
       this.state = {
+        cities: [],
+        retailers: [],
         states: [],
-        stores: [],
-        // is_active: true,
-        selectedStoreIdx: -1,
-        stateList: [],
-        retailerList: [],
-        selectedStateIdx: -1,
-        cityList: [],
         password: "",
         email: "",
         mobile_number: "",
-        selectedCityIdx: -1,
-        selectedStatusIdx: 1,
-        stateMap: {},
         emailErr: {
           value: "",
           status: false
@@ -44,35 +36,55 @@ export default function CreateNewPromoter(props) {
         { text: "Active", value: 1 },
         { text: "Inactive", value: 2 }
       ]
-      this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
       this.handleTextChange = this.handleTextChange.bind(this)
-      this.formatResponse = this.formatResponse.bind(this)
-      this.updateCityList = this.updateCityList.bind(this)
       this.handleSave = this.handleSave.bind(this)
       this.isFormValid = this.isFormValid.bind(this)
-      this.handleSelectChange = this.handleSelectChange.bind(this)
+      this.handleStateChange = this.handleStateChange.bind(this)
+      this.handleCityChange = this.handleCityChange.bind(this)
+      this.setStates = this.setStates.bind(this)
     }
     componentDidMount() {
       /** fetch states, ciities and retailers */
-      fetchStatesandCities({})
+      fetchStatesandCities()
         .then((response) => {
-          this.formatResponse(response)
+          this.setStates(response.states)
+          this.setCities(response.states)
         })
-        .catch((err) => {
-          console.log("Error in fetching state and city list", err)
+        .catch(err => {
+          console.log(err)
         })
     }
 
-    formatResponse(data) {
-      const { stateList, cityList, stateMap } = formatStateAndCityList(data.states)
-      this.setState({
-        stateList,
-        selectedStateIdx: stateList[0].value,
-        cityList,
-        selectedCityIdx: cityList[0].value,
-        stateMap
-      })
+    setRetailers(retailers) {
+      this.setState({ retailers })
     }
+
+    setStates(states) {
+      this.setState({ states })
+    }
+
+    setCities(states) {
+      const { cities } = states[0]
+      this.setState({ cities: states[0].cities })
+
+      const fetchRetailersReq = {
+        offset: 0,
+        limit: 1000,
+        filter: {
+          column: "CityName",
+          operator: "CASEIGNORE",
+          value: cities[0].city_name
+        }
+      }
+      fetchRetailers(fetchRetailersReq)
+        .then(fetchRetailersRes => {
+          this.setRetailers(fetchRetailersRes.ret_response || [])
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+
     handleCheckboxChange(e) {
       this.setState({
         [e.target.name]: e.target.checked
@@ -87,52 +99,50 @@ export default function CreateNewPromoter(props) {
       })
     }
 
-    handleSelectChange(e) {
-      const selectedField = `selected${e.target.name}Idx`
-      this.setState({ [selectedField]: e.target.value })
-      switch (e.target.name) {
-        case 'City':
-          console.log("city", this.state.cityList, e.target.value, this.state.cityList[e.target.value])
-          this.fetchRetailerList(e.target.value)
-          break;
-        case 'State':
-          this.updateCityList(e.target.value)
-          break;
-      }
+    getCityNameById(cities, city_id) {
+      return cities.find(item => item.city_id === parseInt(city_id)).city_name
     }
 
-    updateCityList(stateId) {
-      this.setState({
-        cityList: this.state.stateMap[stateId],
-        selectedCityIdx: this.state.stateMap[stateId][0].value
-      })
-    }
+    handleStateChange(e) {
+      const state_id = e.target.value
+      const updatedCities = this.state.states.find(item => item.state_id === parseInt(state_id)).cities
+      this.setState({ cities: updatedCities })
 
-    fetchRetailerList(cityId) {
-      const cityName = this.state.cityList.find((item) => parseInt(item.value) === parseInt(cityId)).text
-      fetchRetailers({
+      const fetchRetailersReq = {
+        offset: 0,
+        limit: 1000,
         filter: {
           column: "CityName",
           operator: "CASEIGNORE",
-          value: cityName
-        },
-        limit: 10000,
-        offset: 0
-      })
-        .then((response) => {
-          const retailerList = response.ret_response.map((item) => {
-            return {
-              text: item.outlet_name,
-              value: item.id
-            }
-          })
-          this.setState({
-            retailerList,
-            selectedStoreIdx: retailerList[0].value
-          })
+          value: updatedCities[0].city_name
+        }
+      }
+      fetchRetailers(fetchRetailersReq)
+        .then(fetchRetailersRes => {
+          this.setRetailers(fetchRetailersRes.ret_response || [])
         })
-        .catch((err) => {
-          console.log("Error in fetching retailer list", err)
+        .catch(err => {
+          console.log(err)
+        })
+    }
+
+    handleCityChange(e) {
+      const city_id = e.target.value
+      const fetchRetailersReq = {
+        offset: 0,
+        limit: 1000,
+        filter: {
+          column: "CityName",
+          operator: "CASEIGNORE",
+          value: this.getCityNameById(this.state.cities, city_id)
+        }
+      }
+      fetchRetailers(fetchRetailersReq)
+        .then(fetchRetailersRes => {
+          this.setRetailers(fetchRetailersRes.ret_response || [])
+        })
+        .catch(err => {
+          console.log(err)
         })
     }
 
@@ -178,16 +188,11 @@ export default function CreateNewPromoter(props) {
     }
 
     handleSave() {
-      //console.log("prope", this.props)
       if (this.isFormValid()) {
         const {
           name,
           email,
           mobile_number,
-          selectedStatusIdx,
-          selectedCityIdx,
-          selectedStateIdx,
-          selectedStoreIdx,
           password
         } = this.state
 
@@ -195,17 +200,16 @@ export default function CreateNewPromoter(props) {
           name,
           email,
           mobile_number,
-          is_active: parseInt(selectedStatusIdx) === 1 ? true : false,
-          store_id: parseInt(selectedStoreIdx),
-          state_id: parseInt(selectedStateIdx),
-          city_id: parseInt(selectedCityIdx),
+          is_active: this.statusRef.value === "1" ? true : false,
+          store_id: parseInt(this.retailerRef.value),
+          state_id: parseInt(this.stateRef.value),
+          city_id: parseInt(this.cityRef.value),
           password
         }
         createPromoter(createPromoterReq)
           .then(createPromoterRes => {
             unmountModal()
             alert(createPromoterRes.message)
-            console.log("props", this.props)
             props.history.push("/admin/promoters")
           })
       }
@@ -231,7 +235,7 @@ export default function CreateNewPromoter(props) {
               }
               <FormGroup inline>
                 <label>Phone *</label>
-                <Input name="mobile_number" onChange={this.handleTextChange} />
+                <Input maxLength="10" name="mobile_number" onChange={this.handleTextChange} />
               </FormGroup>
               {
                 mobileErr.status &&
@@ -245,47 +249,39 @@ export default function CreateNewPromoter(props) {
                 passwordErr.status &&
                 <p className="error-message">* {passwordErr.value}</p>
               }
+
               <FormGroup inline>
                 <label>State</label>
-                <Select
-                  options={this.state.stateList}
-                  name="State"
-                  onChange={e => this.handleSelectChange(e)}
-                  value={parseInt(this.state.selectedStateIdx)}
-                />
+                <select ref={(node) => { this.stateRef = node }} onChange={this.handleStateChange}>
+                  {this.state.states.map(item => (
+                    <option key={item.state_id} value={item.state_id}>{item.state_name}</option>
+                  ))}
+                </select>
               </FormGroup>
+
               <FormGroup inline>
                 <label>City</label>
-                <Select
-                  options={this.state.cityList}
-                  name="City"
-                  onChange={e => this.handleSelectChange(e)}
-                  value={parseInt(this.state.selectedCityIdx)}
-                />
+                <select ref={(node) => { this.cityRef = node }} onChange={this.handleCityChange}>
+                  {this.state.cities.map(item => (
+                    <option key={item.city_id} value={item.city_id}>{item.city_name}</option>
+                  ))}
+                </select>
               </FormGroup>
+
               <FormGroup inline>
                 <label>Store</label>
-                <Select
-                  options={this.state.retailerList}
-                  name="Store"
-                  onChange={e => this.handleSelectChange(e)}
-                  value={parseInt(this.state.selectedStoreIdx)}
-                />
+                <select ref={(node) => { this.retailerRef = node }}>
+                  {this.state.retailers.map(item => (
+                    <option key={item.id} value={item.id}>{item.outlet_name}</option>
+                  ))}
+                </select>
               </FormGroup>
               <FormGroup inline>
                 <label>Status</label>
-                {/* <Input
-                  name="is_active"
-                  checked={this.state.is_active}
-                  type="checkbox"
-                  onChange={this.handleCheckboxChange}
-                /> */}
-                <Select
-                  options={this.statusOptions}
-                  name="Status"
-                  onChange={e => this.handleSelectChange(e)}
-                  value={parseInt(this.state.selectedStatusIdx)}
-                />
+                <select ref={(node) => { this.statusRef = node }}>
+                  <option value="1">Active</option>
+                  <option value="0">Inactive</option>
+                </select>
               </FormGroup>
             </Form>
           </div>

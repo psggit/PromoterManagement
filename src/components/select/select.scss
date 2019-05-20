@@ -3,14 +3,27 @@
 //   display: inline-block;
 // }
 
-.select {
-  width: 225px;
-  height: 40px;
-  background-color: rgba(61, 112, 178, 0.1);
-  border: 0;
-  padding: 0 10px;
-  color: #5a6872;
+// .select {
+//   width: 225px;
+//   height: 40px;
+//   background-color: rgba(61, 112, 178, 0.1);
+//   border: 0;
+//   padding: 0 10px;
+//   color: #5a6872;
+//   &:focus {
+//     outline: 0;
+//   }
+// }
+
+select {
+  padding: 5px 20px;
+  height: 36px;
+  background-color: #eff3f6;
+  border-radius: 4px;
+  background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
   &:focus {
     outline: 0;
+    background-image: none;
+    box-shadow: inset 0 0.15em 0.3em rgba(27,31,35,.15);
   }
 }

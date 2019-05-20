@@ -14,8 +14,8 @@ export default function ConfirmModal(props) {
             <ModalHeader><h3>{title}</h3></ModalHeader>
             <ModalBody>{message}</ModalBody>
             <ModalFooter>
-              <Button onClick={unmountModal}>Cancel</Button>
-              <Button onClick={handleConfirm}>Confirm</Button>
+              <Button appearance="secondary" onClick={unmountModal}>Cancel</Button>
+              <Button appearance="primary" onClick={handleConfirm}>Confirm</Button>
             </ModalFooter>
           </ModalBox>
         </div>

@@ -102,7 +102,7 @@ export default function ListPromoters(props) {
 
   const tableColumns = [
     {
-      name: "ID",
+      name: "Store ID",
       mapping: "store_id",
       // fn: id => <NavLink to={`/admin/promoters/detail/${id}`}>{id}</NavLink>
     },
@@ -159,13 +159,13 @@ export default function ListPromoters(props) {
           }}
         />
     },
-    // {
-    //   name: null,
-    //   mapping: null,
-    //   fn: item => <Button appearance="secondary" size="small" onClick={() => {
-    //     mountModal(EditPromoter({}))
-    //   }}>Edit</Button>
-    // }
+    {
+      name: null,
+      mapping: null,
+      fn: item => <Button appearance="secondary" size="small" onClick={() => {
+        mountModal(EditPromoter({ id: item.id, name: item.name, history: props.history }))
+      }}>Edit</Button>
+    }
   ]
 
   return (
