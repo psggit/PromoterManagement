@@ -47,7 +47,7 @@ export default function Login(props) {
 
             <FormGroup>
               <label>Password</label>
-              <Input width="100%" type="password" onChange={(e) => { setPassword(e.target.value) }} />
+              <Input autoComplete="new-password" width="100%" type="password" onChange={(e) => { setPassword(e.target.value) }} />
             </FormGroup>
 
             <Button appearance="primary" width="100%" disabled={isLoading} onClick={handleClick}>Sign in</Button>
