@@ -10,7 +10,7 @@ import { getSession } from "../session";
 
 const getToken = () => ({
   // "Authorization": `Bearer ${localStorage.getItem("auth-token")}`,
-  "x-hasura-role": getSession() ? getSession().hasura_role || null
+  "x-hasura-role": getSession() ? getSession().hasura_role : null
 })
 
 function getHeaders(type) {
