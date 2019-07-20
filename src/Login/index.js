@@ -13,6 +13,7 @@ export default function Login(props) {
 
   const handleClick = e => {
     e.preventDefault()
+    console.log("handle click")
     const authLoginReq = {
       username: userName,
       password: password
