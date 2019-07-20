@@ -2,8 +2,8 @@ import { POST, GET } from "Utils/fetch";
 
 export function authLogin(req) {
   return POST({
-    api: "/login",
-    apiBase: "auth",
+    api: "/auth/login",
+    apiBase: "gremlin",
     type: "Public",
     data: req
   })
