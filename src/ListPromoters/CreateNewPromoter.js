@@ -7,6 +7,7 @@ import { Form, FormGroup } from "Components/Form"
 import Toggle from "Components/Toggle"
 import { createPromoter, fetchStatesandCities, fetchRetailers } from "../Api";
 import { formatStateAndCityList, emailRegex } from "Utils/helpers"
+import { mobileRegex } from "Utils/helpers";
 
 export default function CreateNewPromoter(props) {
   return class CreateNewPromoter extends React.Component {
@@ -170,6 +171,15 @@ export default function CreateNewPromoter(props) {
         this.setState({
           mobileErr: {
             value: "Mobile number is required",
+            status: true
+          }
+        })
+        return false
+      }
+      if (!mobileRegex.test(this.state.mobile_number.trim())) {
+        this.setState({
+          mobileErr: {
+            value: "Mobile number is invalid",
             status: true
           }
         })
