@@ -10,6 +10,7 @@ export default function Login(props) {
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setLoadingState] = useState(false)
+  const [loginErr, setLoginErr] = useState(false)
 
   const handleClick = e => {
     e.preventDefault()
@@ -30,6 +31,7 @@ export default function Login(props) {
         })
         .catch(err => {
           console.log(err)
+          setLoginErr(true)
           setLoadingState(false)
         })
     }
@@ -43,14 +45,17 @@ export default function Login(props) {
           <Form>
             <FormGroup>
               <label>Username</label>
-              <Input width="100%" onChange={(e) => { setUserName(e.target.value) }} />
+              <Input width="100%" onChange={(e) => { setUserName(e.target.value); setLoginErr(false) }} />
             </FormGroup>
 
             <FormGroup>
               <label>Password</label>
-              <Input autoComplete="new-password" width="100%" type="password" onChange={(e) => { setPassword(e.target.value) }} />
+              <Input autoComplete="new-password" width="100%" type="password" onChange={(e) => { setPassword(e.target.value); setLoginErr(false) }} />
             </FormGroup>
-
+            {
+              loginErr &&
+              <p className="error-message">Username or password is invalid</p>
+            }
             <Button appearance="primary" width="100%" disabled={isLoading} onClick={handleClick}>Sign in</Button>
           </Form>
         </div>
