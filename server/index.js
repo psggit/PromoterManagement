@@ -32,6 +32,6 @@ app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./../dist/index.html"))
 })
 
-app.listen(8080, () => {
-  console.log("Server is listening on port 8080")
+app.listen(8002, () => {
+  console.log("Server is listening on port 8002")
 })
