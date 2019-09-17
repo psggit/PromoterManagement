@@ -41,7 +41,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server/index.js",
-    "build-client": "webpack --config ./webpack-config/client/webpack.prod.js",
+    "build-client": "BASE_URL=hipbar-dev.com webpack --config ./webpack-config/client/webpack.prod.js",
     "build-client-basket": "BASE_URL=basketball38.hasura-app.io webpack --config ./webpack-config/client/webpack.prod.js",
     "build-client-prod": "BASE_URL=hipbar.com webpack --config ./webpack-config/client/webpack.prod.js",
     "build-client-staging": "BASE_URL=hipbar-stg.com webpack --config ./webpack-config/client/webpack.prod.js",
