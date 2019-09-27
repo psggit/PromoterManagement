@@ -50,6 +50,7 @@
     "build-basket": "yarn run build-client-basket",
     "build-staging": "yarn run build-client-staging",
     "build-prod": "yarn run build-client-prod",
-    "start:dev": "webpack-dev-server --config ./webpack-config/client/webpack.dev.js --host 0.0.0.0"
+    "start:dev": "webpack-dev-server --config ./webpack-config/client/webpack.dev.js --host 0.0.0.0",
+    "start:local": "webpack-dev-server --config ./webpack-config/client/webpack.dev.js --disable-host-check"
   }
 }

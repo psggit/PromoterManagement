@@ -1,43 +1,54 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "commonjs": true,
+        "es6": true,
+        "node": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
+    ],
+    // "radix": [
+    //   "error",
+    //   "as-needed"
+    // ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
     ],
     "rules": {
-        "indent": [
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "no-extra-semi": "error",
+        "no-multi-spaces": "warn",
+        "no-useless-constructor": "error",
+        "lines-between-class-members": [
             "error",
-            2
+            "always"
         ],
-        "react/display-name": [
+        "jsx-quotes": [
+            "error",
+            "prefer-double"
+        ],
+        "space-before-function-paren": [
+            "error",
             {
-                "ignoreTranspilerName": true
+                "named": "always"
             }
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ]
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     }
 }
