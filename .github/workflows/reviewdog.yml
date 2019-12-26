@@ -1,5 +1,4 @@
- 
-name: reviewdog-eslint
+name: reviewdog
 on: [pull_request]
 jobs:
   eslint:
@@ -13,3 +12,14 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-review # Change reporter.
           eslint_flags: 'src/'
+  stylelint:
+    name: runner / stylelint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: stylelint
+        uses: reviewdog/action-stylelint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review # Change reporter.
+          stylelint_input: '**/*.css'
