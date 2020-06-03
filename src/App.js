@@ -40,7 +40,7 @@ function App() {
           location.href = "/admin/login"
         }
       })
-  }, [])
+  })
 
   return (
     <Router key={appKey} history={history}>
